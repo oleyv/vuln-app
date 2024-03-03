@@ -1,3 +1,7 @@
+> [!CAUTION]
+> **This is a vulnerable app**: Play with it in an isolated environment AKA DO NOT EXPOSE IT TO PUBLIC NETWORKS!
+> **Default SSH Password**: DO NOT USE IT 'as is'
+
 # Introduction to Hands-on Security
 We will expand on this during our discussions.
 
