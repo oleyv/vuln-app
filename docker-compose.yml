@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  container1:
+    image: evil-box
+    ports:
+      - "2222:22"
+
+  container2:
+    image: bad-app
+    ports:
+      - "5001:5000"

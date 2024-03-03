@@ -1,0 +1,27 @@
+FROM debian:latest
+
+# Base
+RUN apt update && apt upgrade 
+
+# Installing all necessary tools for the exercise
+RUN apt install -y openssh-server curl nmap gobuster netcat-traditional vim
+COPY ./gobuster.txt /root/
+COPY ./hello.py /root/
+
+# SSH to simulate a real(ish) feel
+# Satisfying sshd directory structure
+RUN mkdir /var/run/sshd
+
+# Setting passwords
+RUN echo 'root:password' | chpasswd
+
+# Enabeling root login covering all deb distros cases
+RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed -i 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# Making plugable auth modules working and ssh
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+# Running sshd as a daemon
+EXPOSE 22 12345
+CMD ["/usr/sbin/sshd", "-D"]
