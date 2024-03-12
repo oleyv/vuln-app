@@ -14,7 +14,7 @@ def upload_file():
         from_web.save(os.path.join('/opt/app/files', from_web.filename))
         # pwnd portion; it is very unlikely that someone could do it,but for demo purposes is good 
         # app.logger.debug(f"============ls {from_web.filename}============")
-        command = [f'cd /opt/app/files && {from_web.filename}']
+        command = [f'cd /opt/app/files && ls {from_web.filename}']
         get_pwnd = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE).stdout
         lst =  get_pwnd.read()
         return lst.decode()
